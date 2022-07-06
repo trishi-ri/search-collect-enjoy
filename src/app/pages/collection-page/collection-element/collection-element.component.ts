@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ICollectionElement } from './collection-element.model';
 
 @Component({
@@ -6,10 +6,6 @@ import { ICollectionElement } from './collection-element.model';
   templateUrl: './collection-element.component.html',
   styleUrls: ['./collection-element.component.scss'],
 })
-export class CollectionElementComponent implements OnInit {
-  @Input() element!: ICollectionElement;
-
-  constructor() {}
-
-  ngOnInit(): void {}
+export class CollectionElementComponent {
+  @Input() public element!: ICollectionElement;
 }

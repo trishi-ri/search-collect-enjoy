@@ -7,5 +7,5 @@ import { routes } from './app-routing.module';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public pageRoutes = routes.filter((route) => route.component);
+  pageRoutes = routes.filter((route) => route.component);
 }

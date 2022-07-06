@@ -19,6 +19,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CollectionPageComponent } from './pages/collection-page/collection-page.component';
 import { CollectionElementComponent } from './pages/collection-page/collection-element/collection-element.component';
 import { CollectionFilterComponent } from './pages/collection-page/collection-filter/collection-filter.component';
+import { CollectionPaginatorComponent } from './pages/collection-page/collection-paginator/collection-paginator.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CollectionFilterComponent } from './pages/collection-page/collection-fi
     CollectionPageComponent,
     CollectionElementComponent,
     CollectionFilterComponent,
+    CollectionPaginatorComponent,
   ],
   imports: [
     BrowserModule,

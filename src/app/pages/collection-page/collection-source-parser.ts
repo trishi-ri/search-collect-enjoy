@@ -42,14 +42,14 @@ export class ParsedString implements PatternElementVisitor {
   constructor(public result: string = '') {}
 
   visitWord(word: ParserWord): void {
-    this.result = [this.result, word.value].join(' ');
+    this.result = [this.result, word.value].join(' ').trim();
   }
 
   visitDictionary(dictionary: ParserDictionary): void {
     const elements = dictionary.source.dictionaries[dictionary.dictionaryName];
-    this.result = [this.result, RandomUtils.getRandomElement(elements)].join(
-      ' '
-    );
+    this.result = [this.result, RandomUtils.getRandomElement(elements)]
+      .join(' ')
+      .trim();
   }
 
   visitContextParameter(contextParameter: ParserContextParameter): void {

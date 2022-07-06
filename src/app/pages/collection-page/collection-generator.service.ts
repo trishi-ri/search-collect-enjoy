@@ -17,7 +17,7 @@ export class CollectionGenerator {
 
   constructor(private http: HttpClient) {}
 
-  init(config: ICollectionGeneratorConfig): Observable<void> {
+  public init(config: ICollectionGeneratorConfig): Observable<void> {
     this.maxLength = config.maxCollectionLength;
     return this.getCollectionSource().pipe(
       map((source) => this.source.next(source))
@@ -25,7 +25,10 @@ export class CollectionGenerator {
   }
 
   public generate(collectionName: string = 'default'): Collection {
-    return new Collection(collectionName, this.generateElements());
+    return new Collection({
+      name: collectionName,
+      elements: this.generateElements(),
+    });
   }
 
   private generateElements(): ICollectionElement[] {

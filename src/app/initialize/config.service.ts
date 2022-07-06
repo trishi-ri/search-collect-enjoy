@@ -7,6 +7,7 @@ import {
   ICollectionFilter,
   CollectionFilterEnum,
 } from '../pages/collection-page/collection-filter/collection-filter.model';
+import { ICollectionPaginator } from '../pages/collection-page/collection-paginator/collection-paginator.model';
 
 interface IConfig {
   collection: ICollectionConfig;
@@ -15,8 +16,7 @@ interface IConfig {
 
 export interface ICollectionConfig {
   filter: ICollectionFilter;
-  pagination: PageEvent;
-  pageSizeOptions: number[];
+  paginator: ICollectionPaginator;
 }
 
 export interface ICollectionGeneratorConfig {
@@ -27,7 +27,7 @@ export interface ICollectionGeneratorConfig {
   providedIn: 'root',
 })
 export class ConfigService {
-  getConfig(): Observable<IConfig> {
+  public getConfig(): Observable<IConfig> {
     const collection: ICollectionConfig = {
       filter: {
         options: [
@@ -52,13 +52,15 @@ export class ConfigService {
         ],
         value: CollectionFilterEnum.all,
       },
-      pagination: {
-        length: 0,
-        pageIndex: 0,
-        pageSize: 25,
-        previousPageIndex: 0,
+      paginator: {
+        pagination: {
+          length: 0,
+          pageIndex: 0,
+          pageSize: 25,
+          previousPageIndex: 0,
+        },
+        pageSizeOptions: [5, 10, 25, 100],
       },
-      pageSizeOptions: [5, 10, 25, 100],
     };
     const collectionGenerator: ICollectionGeneratorConfig = {
       maxCollectionLength: 100,

@@ -20,7 +20,7 @@ export class NotificationService {
       .subscribe();
   }
 
-  notify(notification: INotification): void {
+  public notify(notification: INotification): void {
     this.notification.next(notification);
   }
 

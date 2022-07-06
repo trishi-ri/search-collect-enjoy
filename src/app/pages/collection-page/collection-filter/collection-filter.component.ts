@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ICollectionConfig } from 'src/app/initialize/config.service';
+import { Component } from '@angular/core';
 import { CollectionService } from '../collection.service';
 import {
   ICollectionFilter,
@@ -11,14 +10,12 @@ import {
   templateUrl: './collection-filter.component.html',
   styleUrls: ['./collection-filter.component.scss'],
 })
-export class CollectionFilterComponent implements OnInit {
+export class CollectionFilterComponent {
   readonly filter: ICollectionFilter = this.collectionService.filter;
 
   constructor(private collectionService: CollectionService) {}
 
-  ngOnInit(): void {}
-
-  onFilterChange(value: CollectionFilterEnum) {
+  public onFilterChange(value: CollectionFilterEnum) {
     this.collectionService.updateFilter(value);
   }
 }

@@ -24,11 +24,11 @@ export class CollectionElement implements ICollectionElement {
     public readonly iconStyle: Record<string, string>
   ) {}
 
-  use(): void {
+  public use(): void {
     throw new Error('Method not implemented.');
   }
 
-  discover(): void {
+  public discover(): void {
     this.howManyFound = this.howManyFound + 1;
     if (!this.firstDiscover) {
       this.firstDiscover = new Date().toISOString();
