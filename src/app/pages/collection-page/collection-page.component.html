@@ -1,0 +1,18 @@
+<app-collection-filter></app-collection-filter>
+
+<ng-container *ngIf="elements | async as elements">
+  <mat-paginator
+    class="paginator"
+    [length]="config.pagination.length"
+    [pageSize]="config.pagination.pageSize"
+    [pageSizeOptions]="config.pageSizeOptions"
+    (page)="onPageChanged($event)"
+  >
+  </mat-paginator>
+  <div class="collection-elements">
+    <app-collection-element
+      [element]="element"
+      *ngFor="let element of elements"
+    ></app-collection-element>
+  </div>
+</ng-container>

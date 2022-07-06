@@ -1,0 +1,11 @@
+<mat-button-toggle-group
+  [value]="filter.value"
+  (change)="onFilterChange($event.value)"
+  *ngIf="filter"
+>
+  <mat-button-toggle
+    [value]="option.value"
+    *ngFor="let option of filter.options"
+    >{{ option.name }} ({{ option.count }})</mat-button-toggle
+  >
+</mat-button-toggle-group>

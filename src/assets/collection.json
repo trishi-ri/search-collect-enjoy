@@ -1,0 +1,47 @@
+{
+  "patterns": {
+    "name": "{defenition} {color} {item}",
+    "description": "it's a ${context.name}"
+  },
+  "patternParsers": {
+    "dictionary": "\"{(\\\\w+)}\"",
+    "contextParameter": "\"\\\\${context.(\\\\w+)}\""
+  },
+  "dictionaries": {
+    "color": [
+      "white",
+      "black",
+      "red",
+      "blue",
+      "green",
+      "yellow",
+      "orange",
+      "brown"
+    ],
+    "item": [
+      "milk",
+      "clock",
+      "chair",
+      "bread",
+      "plate",
+      "glass",
+      "toy",
+      "potato",
+      "apple"
+    ],
+    "defenition": [
+      "sweet",
+      "happy",
+      "sad",
+      "serious",
+      "young",
+      "old",
+      "new",
+      "small",
+      "big",
+      "large",
+      "heavy",
+      "long"
+    ]
+  }
+}
