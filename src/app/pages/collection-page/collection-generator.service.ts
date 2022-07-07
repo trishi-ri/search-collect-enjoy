@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { ICollectionGeneratorConfig } from 'src/app/initialize/config.service';
+
 import {
   ICollectionElement,
   CollectionElement,
   CssStyle,
-} from './collection-element/collection-element.model';
+  Collection,
+} from './models';
 import { generateFromSource } from './collection-source-parser';
-import { Collection } from './collection.model';
+import { ICollectionGeneratorConfig } from './collection.config';
 
-@Injectable({ providedIn: 'root' })
-export class CollectionGenerator {
+@Injectable()
+export class CollectionGeneratorService {
   private maxLength = 0;
   private source = new BehaviorSubject<CollectionSource | undefined>(undefined);
 
@@ -47,7 +48,7 @@ export class CollectionGenerator {
       }, [])
       .map((name: string, index: number) => {
         const description = this.generateDescription(source, { name });
-        const iconStyle = this.generateIconStyle(name.split(' ')[0]);
+        const iconStyle = this.generateIconStyle(source, name);
         return new CollectionElement(index, name, description, iconStyle);
       });
   }
@@ -63,9 +64,12 @@ export class CollectionGenerator {
     return generateFromSource(source, source.patterns.description, context);
   }
 
-  private generateIconStyle(elementColor: string): CssStyle {
+  private generateIconStyle(source: CollectionSource, name: string): CssStyle {
+    const colorRegexResult = name.match(
+      new RegExp(JSON.parse(source.patternParsers.colorFromName))
+    );
     return {
-      background: elementColor,
+      background: colorRegexResult ? colorRegexResult[1] : 'inherit',
       outline: '1px solid black',
       opacity: '0.5',
     };
@@ -80,10 +84,12 @@ export type CollectionSource = {
   patterns: {
     name: string;
     description: string;
+    iconStyle: string;
   };
   patternParsers: {
     dictionary: string;
     contextParameter: string;
+    colorFromName: string;
   };
   dictionaries: {
     color: string[];

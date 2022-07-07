@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICollectionElement } from './collection-element/collection-element.model';
+
+import { ICollectionElement } from './models';
 import { CollectionService } from './collection.service';
 
 @Component({

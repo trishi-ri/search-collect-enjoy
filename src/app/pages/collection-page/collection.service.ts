@@ -1,36 +1,37 @@
 import { Injectable } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+
+import { Storageble } from 'src/app/initialize/storage.service';
 import {
   CollectionElement,
   ICollectionElement,
-} from './collection-element/collection-element.model';
-import {
   ICollectionFilter,
   CollectionFilterEnum,
-} from './collection-filter/collection-filter.model';
-import { ICollectionConfig } from '../../initialize/config.service';
-import { PageEvent } from '@angular/material/paginator';
-import { CollectionGenerator } from './collection-generator.service';
-import { Collection, ICollection } from './collection.model';
-import { Storageble } from 'src/app/initialize/storage.service';
-import { ICollectionPaginator } from './collection-paginator/collection-paginator.model';
+  Collection,
+  ICollection,
+  ICollectionPaginator,
+} from './models';
+import { CollectionGeneratorService } from './collection-generator.service';
+import { ICollectionConfig } from './collection.config';
 
 interface ICollectionState {
   collection: ICollection;
   config: ICollectionConfig;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CollectionService extends Storageble<ICollectionState> {
   private collection: Collection = new Collection();
   private _elements = new BehaviorSubject<ICollectionElement[]>([]);
   config!: ICollectionConfig;
 
-  constructor(private generator: CollectionGenerator) {
+  constructor(private generator: CollectionGeneratorService) {
     super('collection');
   }
 
   init(config: ICollectionConfig): void {
+    // TODO: get page, filter, sort from url - not from storage
     const loaded = this.load();
     this.config = loaded?.config
       ? this.loadConfig(config, loaded.config)

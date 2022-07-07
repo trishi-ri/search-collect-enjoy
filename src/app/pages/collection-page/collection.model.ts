@@ -1,7 +1,4 @@
-import {
-  CollectionElement,
-  ICollectionElement,
-} from './collection-element/collection-element.model';
+import { CollectionElement, ICollectionElement } from '@collection-page/models';
 
 export class Collection implements ICollection {
   name?: string;

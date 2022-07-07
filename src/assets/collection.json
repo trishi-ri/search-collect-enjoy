@@ -5,7 +5,8 @@
   },
   "patternParsers": {
     "dictionary": "\"{(\\\\w+)}\"",
-    "contextParameter": "\"\\\\${context.(\\\\w+)}\""
+    "contextParameter": "\"\\\\${context.(\\\\w+)}\"",
+    "colorFromName": "\"\\\\w+\\\\s(\\\\w+)\\\\s\\\\w+\""
   },
   "dictionaries": {
     "color": [

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { CollectionService } from '../collection.service';
-import { ICollectionPaginator } from './collection-paginator.model';
+import { ICollectionPaginator } from '../models';
 
 @Component({
   selector: 'app-collection-paginator',

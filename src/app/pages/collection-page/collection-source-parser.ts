@@ -1,4 +1,4 @@
-import { RandomUtils } from 'src/app/utils/random.utils';
+import { RandomUtils } from '@shared/utils/random.utils';
 import { CollectionSource as CollectionSource } from './collection-generator.service';
 
 interface PatternElement {
