@@ -1,5 +1,3 @@
-type UnloadedValue<T> = T | undefined;
-
 export abstract class Storageble<T> {
   private readonly mainKey = 'sce';
 
@@ -9,17 +7,15 @@ export abstract class Storageble<T> {
     localStorage.setItem(this.fullKey, this.convertItemToStorageItem(value));
   }
 
-  load<U = undefined>(
-    unloadedValue: UnloadedValue<U> = undefined
-  ): T | UnloadedValue<U> {
+  load(): T | undefined {
     const value = localStorage.getItem(this.fullKey);
     if (!value) {
-      return unloadedValue;
+      return undefined;
     }
     try {
       return this.convertStorageItemToItem(value);
     } catch {
-      return unloadedValue;
+      return undefined;
     }
   }
 

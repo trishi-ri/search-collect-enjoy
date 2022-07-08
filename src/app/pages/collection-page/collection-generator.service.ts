@@ -49,7 +49,12 @@ export class CollectionGeneratorService {
       .map((name: string, index: number) => {
         const description = this.generateDescription(source, { name });
         const iconStyle = this.generateIconStyle(source, name);
-        return new CollectionElement(index, name, description, iconStyle);
+        return new CollectionElement({
+          id: index,
+          name,
+          description,
+          iconStyle,
+        });
       });
   }
 

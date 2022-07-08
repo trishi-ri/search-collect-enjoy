@@ -14,15 +14,21 @@ export interface ICollectionElement {
 }
 
 export class CollectionElement implements ICollectionElement {
+  id: number;
+  name: string;
+  description: string;
   firstDiscover?: DateTimeISO;
-  howManyFound: number = 0;
+  howManyFound: number;
+  iconStyle: CssStyle;
 
-  constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly description: string,
-    public readonly iconStyle: Record<string, string>
-  ) {}
+  constructor(element: Partial<ICollectionElement>) {
+    this.id = element.id ?? 0;
+    this.name = element.name ?? '';
+    this.description = element.description ?? '';
+    this.firstDiscover = element.firstDiscover;
+    this.iconStyle = element.iconStyle ?? {};
+    this.howManyFound = element.howManyFound ?? 0;
+  }
 
   public use(): void {
     throw new Error('Method not implemented.');

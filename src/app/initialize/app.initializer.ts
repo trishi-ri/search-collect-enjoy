@@ -8,7 +8,6 @@ import { ConfigService, IMainConfig } from './config.service';
 import { NotificationService } from './notification.service';
 import { IoCKeys } from 'src/assets/ioc-keys';
 import { IoCModel } from '@shared/models/ioc';
-import { EventsService } from './events.service';
 
 export const IoC = new IoCModel();
 
@@ -16,8 +15,7 @@ function loadConfigFactory(
   configService: ConfigService,
   collectionGenerator: CollectionGeneratorService,
   collectionService: CollectionService,
-  notificationService: NotificationService,
-  eventsService: EventsService
+  notificationService: NotificationService
 ) {
   return () =>
     configService
@@ -51,7 +49,6 @@ export const loadConfigProvider: FactoryProvider = {
     CollectionGeneratorService,
     CollectionService,
     NotificationService,
-    EventsService,
   ],
   multi: true,
 };

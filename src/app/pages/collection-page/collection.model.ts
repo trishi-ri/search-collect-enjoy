@@ -7,13 +7,7 @@ export class Collection implements ICollection {
   constructor(collection?: ICollection) {
     this.name = collection?.name;
     this.elements = (collection?.elements || []).map(
-      (element) =>
-        new CollectionElement(
-          element.id,
-          element.name,
-          element.description,
-          element.iconStyle
-        )
+      (element) => new CollectionElement(element)
     );
   }
 }

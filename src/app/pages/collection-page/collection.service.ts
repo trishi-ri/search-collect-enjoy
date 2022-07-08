@@ -119,6 +119,7 @@ export class CollectionService extends Storageble<ICollectionState> {
   }
 
   private saveState(): void {
+    // TODO: вызывать автоматически при изменения состояния коллекции или конфига
     this.save({ collection: this.collection, config: this.config });
   }
 }
