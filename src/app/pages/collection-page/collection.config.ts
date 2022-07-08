@@ -1,6 +1,4 @@
-import { ICommand } from '@shared/models/command';
 import { IUObject, UObject } from '@shared/models/u-object';
-import { IoC } from 'src/app/initialize/app.initializer';
 import { IoCKeys } from 'src/assets/ioc-keys';
 import {
   ICollectionFilter,

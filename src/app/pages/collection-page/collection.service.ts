@@ -20,7 +20,7 @@ interface ICollectionState {
   config: ICollectionConfig;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class CollectionService extends Storageble<ICollectionState> {
   private collection: Collection = new Collection();
   private _elements = new BehaviorSubject<ICollectionElement[]>([]);

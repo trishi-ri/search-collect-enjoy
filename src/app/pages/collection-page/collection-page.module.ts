@@ -3,7 +3,6 @@ import { CollectionElementComponent } from './collection-element/collection-elem
 import { CollectionFilterComponent } from './collection-filter/collection-filter.component';
 import { CollectionPageComponent } from './collection-page.component';
 import { CollectionPaginatorComponent } from './collection-paginator/collection-paginator.component';
-import { CollectionService } from './collection.service';
 import { Routes, RouterModule } from '@angular/router';
 import { CollectionGeneratorService } from './collection-generator.service';
 import { CommonModule } from '@angular/common';
@@ -26,7 +25,7 @@ const COMPONENTS = [
 @NgModule({
   declarations: [...COMPONENTS],
   imports: [CommonModule, RouterModule.forChild(routes), NgMaterialModule],
-  providers: [CollectionService, CollectionGeneratorService],
+  providers: [CollectionGeneratorService],
   exports: [RouterModule],
 })
 export class CollectionPageModule {}
