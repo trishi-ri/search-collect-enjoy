@@ -1,0 +1,11 @@
+<app-collection-filter></app-collection-filter>
+
+<ng-container *ngIf="elements | async as elements">
+  <app-collection-paginator class="paginator"></app-collection-paginator>
+  <div class="collection-elements">
+    <app-collection-element
+      [element]="element"
+      *ngFor="let element of elements"
+    ></app-collection-element>
+  </div>
+</ng-container>

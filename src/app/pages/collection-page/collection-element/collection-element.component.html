@@ -1,0 +1,24 @@
+<mat-card
+  class="collection-element"
+  [class.unknown-element]="!element.firstDiscover"
+>
+  <mat-card-header>
+    <div
+      *ngIf="element.firstDiscover"
+      mat-card-avatar
+      [ngStyle]="element.iconStyle"
+    ></div>
+    <mat-card-title>{{
+      element.firstDiscover ? element.name : "uncollected"
+    }}</mat-card-title>
+    <mat-card-subtitle>#{{ element.id }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content *ngIf="element.firstDiscover">
+    <p>{{ element.description }}</p>
+    <p>
+      <small>first discover: {{ element.firstDiscover | date }}</small
+      ><br />
+      <small>discovered times: {{ element.howManyFound }}</small>
+    </p>
+  </mat-card-content>
+</mat-card>
