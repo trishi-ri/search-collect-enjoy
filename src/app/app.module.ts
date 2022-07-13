@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { loadConfigProvider } from './initialize/app.initializer';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CollectionPageModule } from '@collection-page/collection-page.module';
-import { NgMaterialModule } from './ng-material.module';
+import { NgMaterialModule } from './shared/ng-material.module';
 
 @NgModule({
   declarations: [AppComponent, MainPageComponent],

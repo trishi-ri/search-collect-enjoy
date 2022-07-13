@@ -1,0 +1,13 @@
+<app-search-timer
+  [timerState]="timerState"
+  (timerChanged)="onTimerChanged()"
+  (timerIsDone)="onTimerDone()"
+></app-search-timer>
+<button
+  mat-raised-button
+  color="accent"
+  [disabled]="disableSearchButton"
+  (click)="onSearchClick()"
+>
+  search
+</button>

@@ -6,7 +6,7 @@ import { CollectionPaginatorComponent } from './collection-paginator/collection-
 import { Routes, RouterModule } from '@angular/router';
 import { CollectionGeneratorService } from './collection-generator.service';
 import { CommonModule } from '@angular/common';
-import { NgMaterialModule } from 'src/app/ng-material.module';
+import { NgMaterialModule } from '@shared/ng-material.module';
 
 const routes: Routes = [
   {

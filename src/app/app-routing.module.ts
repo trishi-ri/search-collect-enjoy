@@ -5,6 +5,11 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 export const routes: Routes = [
   { path: 'main', component: MainPageComponent },
   {
+    path: 'search',
+    loadChildren: () =>
+      import('@search-page/search-page.module').then((m) => m.SearchPageModule),
+  },
+  {
     path: 'collection',
     loadChildren: () =>
       import('@collection-page/collection-page.module').then(

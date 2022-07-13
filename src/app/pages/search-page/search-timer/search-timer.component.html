@@ -1,0 +1,19 @@
+<mat-progress-spinner mode="determinate" value="100"> </mat-progress-spinner>
+<mat-progress-spinner
+  class="time-spinner"
+  mode="determinate"
+  color="warn"
+  [value]="progress"
+>
+</mat-progress-spinner>
+<mat-progress-spinner
+  class="seconds-spinner"
+  mode="determinate"
+  color="accent"
+  [value]="secondsProgress"
+>
+</mat-progress-spinner>
+
+<div class="search-timer">
+  {{ timerTime | searchTimer }}
+</div>
