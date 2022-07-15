@@ -9,6 +9,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const MODULES = [
   MatGridListModule,
@@ -21,6 +22,7 @@ const MODULES = [
   MatButtonToggleModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatBadgeModule,
 ];
 
 @NgModule({

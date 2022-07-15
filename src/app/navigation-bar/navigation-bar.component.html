@@ -1,0 +1,14 @@
+<mat-toolbar class="app-toolbar" color="primary">
+  <a
+    mat-stroked-button
+    class="page-link"
+    routerLinkActive="page-link-active"
+    *ngFor="let navigationButton of navigationButtons"
+    [routerLink]="navigationButton.path"
+    [matBadge]="navigationButton.notifyBadge"
+    [matBadgeHidden]="navigationButton.notifyBadgeHidden"
+    matBadgeColor="accent"
+    (click)="onClickButton(navigationButton)"
+    >{{ navigationButton.name }}</a
+  >
+</mat-toolbar>

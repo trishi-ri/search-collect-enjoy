@@ -10,9 +10,10 @@ import { loadConfigProvider } from './initialize/app.initializer';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { CollectionPageModule } from '@collection-page/collection-page.module';
 import { NgMaterialModule } from './shared/ng-material.module';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 
 @NgModule({
-  declarations: [AppComponent, MainPageComponent],
+  declarations: [AppComponent, MainPageComponent, NavigationBarComponent],
   imports: [
     CommonModule,
     CollectionPageModule,

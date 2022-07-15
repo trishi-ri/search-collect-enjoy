@@ -16,6 +16,10 @@ export class SearchService extends Storageble<ISearchState> {
     super('search');
   }
 
+  public init(): void {
+    // TODO: load config from initializer?
+  }
+
   public saveTime(timerState?: ITimerState): void {
     this.save({ timerState });
   }
@@ -27,13 +31,16 @@ export class SearchService extends Storageble<ISearchState> {
   protected convertItemToStorageItem(item: ISearchState): string {
     return JSON.stringify(item);
   }
+
   protected convertStorageItemToItem(storageItem: string): ISearchState {
     const { timerState } = JSON.parse(storageItem);
     return {
-      timerState: {
-        startTime: new Date(timerState.startTime),
-        durationAsSeconds: timerState.durationAsSeconds,
-      },
+      timerState: timerState
+        ? {
+            startTime: new Date(timerState.startTime),
+            durationAsSeconds: timerState.durationAsSeconds,
+          }
+        : undefined,
     };
   }
 }
