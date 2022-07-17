@@ -18,6 +18,7 @@ export class SearchService extends Storageble<ISearchState> {
 
   public init(): void {
     // TODO: load config from initializer?
+    // TODO: search.json - text while seaching
   }
 
   public saveTime(timerState?: ITimerState): void {

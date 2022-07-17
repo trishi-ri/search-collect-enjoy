@@ -4,3 +4,11 @@
   align-items: center;
   padding: 10px;
 }
+
+.actions-buttons {
+  display: flex;
+  flex-direction: column;
+  button {
+    margin: 5px 0;
+  }
+}

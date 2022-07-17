@@ -6,10 +6,16 @@
   position: relative;
 }
 
-.time-spinner {
-  position: absolute;
+.spinners-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.seconds-spinner {
+
+.time-spinner {
   position: absolute;
 }
 

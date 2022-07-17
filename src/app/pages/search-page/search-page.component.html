@@ -3,11 +3,17 @@
   (timerChanged)="onTimerChanged()"
   (timerIsDone)="onTimerDone()"
 ></app-search-timer>
+
 <button
-  mat-raised-button
-  color="accent"
-  [disabled]="disableSearchButton"
-  (click)="onSearchClick()"
+  mat-button
+  color="warn"
+  *ngIf="searchingInProgress; else searchButton"
+  (click)="onCancelClick()"
 >
-  search
+  cancel
 </button>
+<ng-template #searchButton>
+  <button mat-raised-button color="accent" (click)="onSearchClick()">
+    search
+  </button>
+</ng-template>

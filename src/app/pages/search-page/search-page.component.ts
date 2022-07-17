@@ -10,7 +10,7 @@ import { ITimerState, SearchService } from './search.service';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
-  public disableSearchButton = false;
+  public searchingInProgress = false;
   public timerState?: ITimerState;
 
   constructor(
@@ -27,16 +27,22 @@ export class SearchPageComponent implements OnInit {
   }
 
   public onTimerChanged(): void {
-    this.disableSearchButton = true;
+    this.searchingInProgress = true;
     this.searchService.saveTime(this.timerState);
   }
 
   public onSearchClick(): void {
-    this.timerState = { startTime: new Date(), durationAsSeconds: 10 };
+    this.timerState = { startTime: new Date(), durationAsSeconds: 25 * 60 };
+  }
+
+  public onCancelClick(): void {
+    this.timerState = undefined;
+    this.searchService.saveTime(this.timerState);
+    this.searchingInProgress = false;
   }
 
   public onTimerDone(): void {
-    this.disableSearchButton = false;
+    this.searchingInProgress = false;
     this.searchService.saveTime(undefined);
     const newElement: ICollectionElement =
       this.collectionService.discoverRandomElement();

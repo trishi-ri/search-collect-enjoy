@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ITimerState } from '@search-page/search.service';
 import { timer, take, tap, takeUntil, Subject } from 'rxjs';
-import { TimerTime } from './timer-time.model';
+import { ITimerTime, TimerTime } from './timer-time.model';
 
 @UntilDestroy()
 @Component({
@@ -13,6 +13,9 @@ import { TimerTime } from './timer-time.model';
 export class SearchTimerComponent {
   @Input() set timerState(state: ITimerState | undefined) {
     if (!state) {
+      this.startNewTimerEvent.next();
+      this.timerTime = new TimerTime({ minutes: 0, seconds: 0 });
+      this.updateTimerProgress(this.timerTime, 0);
       return;
     }
     const startTimerTime = this.getStartTimerTime(state);
@@ -26,8 +29,8 @@ export class SearchTimerComponent {
   @Output() timerChanged = new EventEmitter<void>();
 
   @Output() timerIsDone = new EventEmitter<void>();
-  public timerTime!: TimerTime;
-  public progress = 100;
+  public timerTime: TimerTime = new TimerTime({ minutes: 0, seconds: 0 });
+  public minutesProgress = 100;
   public secondsProgress = 100;
 
   private startNewTimerEvent = new Subject<void>();
@@ -36,18 +39,15 @@ export class SearchTimerComponent {
     this.startNewTimerEvent.next();
     this.timerTime = startTime;
     const lastSeconds = startTime.asSeconds;
-    this.updateTimerProgress(lastSeconds, allSeconds);
+    this.updateTimerProgress(startTime, allSeconds);
     timer(0, 1000)
       .pipe(
         take(lastSeconds),
         tap(() => {
           this.timerTime = this.timerTime.addSeconds(-1);
           this.timerChanged.emit();
-          this.updateTimerProgress(
-            allSeconds - this.timerTime.asSeconds,
-            allSeconds
-          );
-          if (this.progress <= 0) {
+          this.updateTimerProgress(this.timerTime, allSeconds);
+          if (this.timerTime.asSeconds <= 0) {
             this.timerIsDone.emit();
           }
         }),
@@ -57,16 +57,13 @@ export class SearchTimerComponent {
       .subscribe();
   }
 
-  private updateTimerProgress(
-    currentSeconds: number,
-    allSeconds: number
-  ): void {
-    this.progress = 100 - Math.trunc((currentSeconds / allSeconds) * 100);
+  private updateTimerProgress(timerTime: ITimerTime, allSeconds: number): void {
+    this.minutesProgress = this.asProcents(
+      timerTime.minutes,
+      (allSeconds - (allSeconds % 60)) / 60
+    );
 
-    const secondsPart = currentSeconds % 60;
-    this.secondsProgress =
-      100 -
-      Math.trunc((secondsPart / (allSeconds > 60 ? 60 : allSeconds)) * 100);
+    this.secondsProgress = this.asProcents(timerTime.seconds, 60);
   }
 
   private getStartTimerTime(state: ITimerState): TimerTime | undefined {
@@ -83,5 +80,9 @@ export class SearchTimerComponent {
     const seconds = lastDurrationAsSeconds % 60;
     const minutes = (lastDurrationAsSeconds - seconds) / 60;
     return new TimerTime({ minutes, seconds });
+  }
+
+  private asProcents(current: number, all: number): number {
+    return Math.trunc((current / all) * 100);
   }
 }
