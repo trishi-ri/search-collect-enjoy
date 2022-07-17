@@ -1,0 +1,37 @@
+<div class="spinners-wrapper">
+  <mat-progress-spinner
+    class="time-spinner"
+    mode="determinate"
+    [diameter]="70"
+    value="100"
+  >
+  </mat-progress-spinner>
+  <mat-progress-spinner
+    class="time-spinner"
+    mode="determinate"
+    color="warn"
+    [diameter]="70"
+    [value]="minutesProgress"
+  >
+  </mat-progress-spinner>
+
+  <mat-progress-spinner
+    class="time-spinner"
+    mode="determinate"
+    [diameter]="100"
+    value="100"
+  >
+  </mat-progress-spinner>
+  <mat-progress-spinner
+    class="time-spinner"
+    mode="determinate"
+    color="accent"
+    [diameter]="100"
+    [value]="secondsProgress"
+  >
+  </mat-progress-spinner>
+</div>
+
+<div class="search-timer">
+  {{ timerTime | searchTimer }}
+</div>

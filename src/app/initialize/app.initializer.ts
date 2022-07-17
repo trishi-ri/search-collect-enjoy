@@ -37,7 +37,10 @@ function loadConfigFactory(
         })
       )
       .pipe(
-        tap(() => notificationService.notify({ message: 'app initialized!' }))
+        tap(() => {
+          notificationService.init();
+          notificationService.notify({ message: 'app initialized!' });
+        })
       );
 }
 

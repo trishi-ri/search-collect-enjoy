@@ -14,6 +14,7 @@ import {
 } from './models';
 import { CollectionGeneratorService } from './collection-generator.service';
 import { ICollectionConfig } from './collection.config';
+import { RandomUtils } from '@shared/utils/random.utils';
 
 interface ICollectionState {
   collection: ICollection;
@@ -95,6 +96,13 @@ export class CollectionService extends Storageble<ICollectionState> {
       ?.filter((element) => ids.includes(element.id))
       .forEach((element) => element.discover());
     this.saveState();
+  }
+
+  discoverRandomElement(): ICollectionElement {
+    const randomElement = RandomUtils.getRandomElement(this._elements.value);
+    randomElement.discover();
+    this.saveState();
+    return randomElement;
   }
 
   protected convertItemToStorageItem(item: ICollectionState): string {

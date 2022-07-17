@@ -14,7 +14,8 @@ export abstract class Storageble<T> {
     }
     try {
       return this.convertStorageItemToItem(value);
-    } catch {
+    } catch (e) {
+      console.error(e);
       return undefined;
     }
   }
@@ -27,6 +28,7 @@ export abstract class Storageble<T> {
     return [this.mainKey, this.storageKey].filter((key) => key).join('.');
   }
 
+  // TODO: optional, if empty then use JSON.parse and JSON.stringfy
   protected abstract convertItemToStorageItem(item: T): string;
   protected abstract convertStorageItemToItem(storageItem: string): T;
 

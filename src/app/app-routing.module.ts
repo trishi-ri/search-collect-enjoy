@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page/main-page.component';
 
-export const routes: Routes = [
-  { path: 'main', component: MainPageComponent },
+export const ROUTES: Routes = [
+  {
+    path: 'search',
+    loadChildren: () =>
+      import('@search-page/search-page.module').then((m) => m.SearchPageModule),
+  },
   {
     path: 'collection',
     loadChildren: () =>
@@ -11,12 +14,12 @@ export const routes: Routes = [
         (m) => m.CollectionPageModule
       ),
   },
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: '**', redirectTo: 'main' },
+  { path: '', redirectTo: 'search', pathMatch: 'full' },
+  { path: '**', redirectTo: 'search' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(ROUTES)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
