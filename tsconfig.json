@@ -21,6 +21,7 @@
     "paths": {
       "@shared/*": ["src/app/shared/*"],
       "@collection-page/*": ["src/app/pages/collection-page/*"],
+      "@inventory-page/*": ["src/app/pages/inventory-page/*"],
       "@search-page/*": ["src/app/pages/search-page/*"]
     }
   },

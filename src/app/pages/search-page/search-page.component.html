@@ -17,3 +17,18 @@
     search
   </button>
 </ng-template>
+
+<div class="new-element-info" *ngIf="newElement">
+  yay! It is {{ newElement.name }}!
+
+  <button
+    mat-raised-button
+    class="new-element-action"
+    (click)="onAddToInventoryClick()"
+  >
+    add to inventory!
+  </button>
+  <button mat-raised-button class="new-element-action" (click)="onDropClick()">
+    drop it
+  </button>
+</div>

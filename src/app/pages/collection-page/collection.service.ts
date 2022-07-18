@@ -105,6 +105,10 @@ export class CollectionService extends Storageble<ICollectionState> {
     return randomElement;
   }
 
+  public getElementById(elementId: number): ICollectionElement | undefined {
+    return this._elements.value.find(({ id }) => id === elementId);
+  }
+
   protected convertItemToStorageItem(item: ICollectionState): string {
     return JSON.stringify(item);
   }
