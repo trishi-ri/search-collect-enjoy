@@ -3,11 +3,11 @@ export abstract class Storageble<T> {
 
   constructor(protected storageKey: string) {}
 
-  save(value: T): void {
+  public save(value: T): void {
     localStorage.setItem(this.fullKey, this.convertItemToStorageItem(value));
   }
 
-  load(): T | undefined {
+  public load(): T | undefined {
     const value = localStorage.getItem(this.fullKey);
     if (!value) {
       return undefined;
@@ -20,7 +20,7 @@ export abstract class Storageble<T> {
     }
   }
 
-  clear(): void {
+  public clear(): void {
     localStorage.removeItem(this.fullKey);
   }
 

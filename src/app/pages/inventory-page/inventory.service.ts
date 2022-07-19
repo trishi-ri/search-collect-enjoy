@@ -13,7 +13,7 @@ export class InventoryService extends Storageble<IInventoryItem[]> {
     super('inventory');
   }
 
-  init(): void {
+  public init(): void {
     const loadedItems = this.load();
     if (loadedItems) {
       this.updateInventory(loadedItems);

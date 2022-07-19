@@ -34,7 +34,7 @@ export class NavigationBarComponent implements OnInit {
       });
   }
 
-  onClickButton(button: INavigationButton): void {
+  public clearNotifies(button: INavigationButton): void {
     button.updateNotifyBadge(0);
     this.notificationService.clearNotificationsForPage(button.path);
   }
