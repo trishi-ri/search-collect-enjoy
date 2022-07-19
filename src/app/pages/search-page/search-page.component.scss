@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 10px;
+  padding: 50px;
 }
 
 .actions-buttons {
@@ -16,9 +16,9 @@
 .new-element-info {
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 20px;
 
   .new-element-action {
-    margin: 5px;
+    margin: 10px;
   }
 }

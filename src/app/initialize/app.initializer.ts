@@ -9,6 +9,7 @@ import { NotificationService } from './notification.service';
 import { IoCKeys } from 'src/assets/ioc-keys';
 import { IoCModel } from '@shared/models/ioc';
 import { InventoryService } from '@inventory-page/inventory.service';
+import { SearchService } from '@search-page/search.service';
 
 export const IoC = new IoCModel();
 
@@ -17,7 +18,8 @@ function loadConfigFactory(
   collectionGenerator: CollectionGeneratorService,
   collectionService: CollectionService,
   notificationService: NotificationService,
-  inventoryService: InventoryService
+  inventoryService: InventoryService,
+  searchService: SearchService
 ) {
   return () =>
     configService
@@ -37,6 +39,8 @@ function loadConfigFactory(
             mainConfig.collection.getProperty(IoCKeys.CollectionConfig)
           );
           inventoryService.init();
+          // TODO: убрать таймер в конфиг
+          searchService.init({ minutes: 0, seconds: 5 });
         })
       )
       .pipe(
@@ -56,6 +60,7 @@ export const loadConfigProvider: FactoryProvider = {
     CollectionService,
     NotificationService,
     InventoryService,
+    SearchService,
   ],
   multi: true,
 };

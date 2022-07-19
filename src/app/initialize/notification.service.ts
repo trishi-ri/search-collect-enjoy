@@ -23,9 +23,9 @@ export class NotificationService extends Storageble<INotification[]> {
       .subscribe();
   }
 
-  init(): void {
+  public init(): void {
     const loadedNotifies = this.load();
-    this._notificationsForPages.next(loadedNotifies ?? []);
+    this.addNotificationsForPage(loadedNotifies ?? []);
   }
 
   public notify(notification: INotification): void {
@@ -40,7 +40,7 @@ export class NotificationService extends Storageble<INotification[]> {
           duration: 3000,
         })
         .afterOpened()
-        .pipe(tap(() => this.addNotificationForPage(notification)))
+        .pipe(tap(() => this.addNotificationsForPage([notification])))
         .pipe(untilDestroyed(this))
         .subscribe();
     });
@@ -58,13 +58,16 @@ export class NotificationService extends Storageble<INotification[]> {
     );
   }
 
-  private addNotificationForPage(notification: INotification): void {
-    if (!notification.targetPath) {
+  private addNotificationsForPage(notifications: INotification[]): void {
+    const notificationsForPage = notifications.filter(
+      (notify) => notify.targetPath
+    );
+    if (!notificationsForPage.length) {
       return;
     }
     this.setNotificationsForPages([
       ...this._notificationsForPages.value,
-      notification,
+      ...notificationsForPage,
     ]);
   }
 

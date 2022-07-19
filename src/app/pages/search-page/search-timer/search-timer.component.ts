@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { ITimerState } from '@search-page/search.service';
 import { timer, take, tap, takeUntil, Subject } from 'rxjs';
+import { IoC } from 'src/app/initialize/app.initializer';
+import { IoCKeys } from 'src/assets/ioc-keys';
 import { ITimerTime, TimerTime } from './timer-time.model';
 
 @UntilDestroy()
@@ -13,9 +15,7 @@ import { ITimerTime, TimerTime } from './timer-time.model';
 export class SearchTimerComponent {
   @Input() set timerState(state: ITimerState | undefined) {
     if (!state) {
-      this.startNewTimerEvent.next();
-      this.timerTime = new TimerTime({ minutes: 0, seconds: 0 });
-      this.updateTimerProgress(this.timerTime, 0);
+      this.resetTimer();
       return;
     }
     const startTimerTime = this.getStartTimerTime(state);
@@ -35,8 +35,13 @@ export class SearchTimerComponent {
 
   private startNewTimerEvent = new Subject<void>();
 
+  constructor() {
+    this.resetTimer();
+  }
+
   public startTimer(startTime: TimerTime, allSeconds: number): void {
     this.startNewTimerEvent.next();
+    console.log(startTime);
     this.timerTime = startTime;
     const lastSeconds = startTime.asSeconds;
     this.updateTimerProgress(startTime, allSeconds);
@@ -49,6 +54,7 @@ export class SearchTimerComponent {
           this.updateTimerProgress(this.timerTime, allSeconds);
           if (this.timerTime.asSeconds <= 0) {
             this.timerIsDone.emit();
+            this.resetTimer();
           }
         }),
         takeUntil(this.startNewTimerEvent),
@@ -84,5 +90,11 @@ export class SearchTimerComponent {
 
   private asProcents(current: number, all: number): number {
     return Math.trunc((current / all) * 100);
+  }
+
+  private resetTimer(): void {
+    this.startNewTimerEvent.next();
+    this.timerTime = IoC.resolve<TimerTime>(IoCKeys.SearchDefaultTimerTime);
+    this.updateTimerProgress(this.timerTime, 0);
   }
 }

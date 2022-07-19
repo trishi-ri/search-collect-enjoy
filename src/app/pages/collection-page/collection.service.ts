@@ -31,7 +31,7 @@ export class CollectionService extends Storageble<ICollectionState> {
     super('collection');
   }
 
-  init(config: ICollectionConfig): void {
+  public init(config: ICollectionConfig): void {
     // TODO: get page, filter, sort from url - not from storage
     const loaded = this.load();
     this.config = loaded?.config
