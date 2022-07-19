@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '@collection-page/collection.service';
 import { ICollectionElement } from '@collection-page/models';
 import { InventoryService } from '@inventory-page/inventory.service';
+import { ICommand } from '@shared/models/command';
+import { IoC } from 'src/app/initialize/app.initializer';
 import { NotificationService } from 'src/app/initialize/notification.service';
+import { IoCKeys } from 'src/assets/ioc-keys';
+import { TimerTime } from './search-timer/timer-time.model';
 import { ITimerState, SearchService } from './search.service';
 
 @Component({
@@ -35,7 +39,12 @@ export class SearchPageComponent implements OnInit {
   }
 
   public onSearchClick(): void {
-    this.timerState = { startTime: new Date(), durationAsSeconds: 5 };
+    // TODO: init parameters in service.init and app-initialization
+    this.timerState = {
+      startTime: new Date(),
+      durationAsSeconds: IoC.resolve<TimerTime>(IoCKeys.SearchDefaultTimerTime)
+        .asSeconds,
+    };
   }
 
   public onCancelClick(): void {

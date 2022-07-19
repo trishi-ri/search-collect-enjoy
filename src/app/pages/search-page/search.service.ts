@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ICommand } from '@shared/models/command';
+import { IoC } from 'src/app/initialize/app.initializer';
 import { Storageble } from 'src/app/initialize/storage.service';
+import { IoCKeys } from 'src/assets/ioc-keys';
+import { ITimerTime, TimerTime } from './search-timer/timer-time.model';
 
 export interface ITimerState {
   startTime: Date;
@@ -16,9 +20,13 @@ export class SearchService extends Storageble<ISearchState> {
     super('search');
   }
 
-  public init(): void {
-    // TODO: load config from initializer?
+  public init(defaultTimerTime: ITimerTime): void {
     // TODO: search.json - text while seaching
+    IoC.resolve<ICommand>(
+      IoCKeys.Registry,
+      IoCKeys.SearchDefaultTimerTime,
+      () => new TimerTime(defaultTimerTime)
+    ).execute();
   }
 
   public saveTime(timerState?: ITimerState): void {

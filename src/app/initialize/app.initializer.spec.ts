@@ -1,11 +1,6 @@
-import { CollectionGeneratorService } from '@collection-page/collection-generator.service';
-import { CollectionService } from '@collection-page/collection.service';
-import { InventoryService } from '@inventory-page/inventory.service';
 import { of } from 'rxjs';
 import { IoCKeys } from 'src/assets/ioc-keys';
 import { loadConfigProvider } from './app.initializer';
-import { ConfigService, IMainConfig } from './config.service';
-import { NotificationService } from './notification.service';
 
 describe('loadConfigProvider', () => {
   it('loadConfigFactory', () => {
@@ -24,6 +19,7 @@ describe('loadConfigProvider', () => {
       'notify',
     ]);
     const inventoryService = jasmine.createSpyObj('InventoryService', ['init']);
+    const searchService = jasmine.createSpyObj('SearchService', ['init']);
 
     const values: Record<string, unknown> = {
       [IoCKeys.CollectionGeneratorConfig]: 'CollectionGeneratorConfig',
@@ -52,7 +48,8 @@ describe('loadConfigProvider', () => {
         collectionGenerator,
         collectionService,
         notificationService,
-        inventoryService
+        inventoryService,
+        searchService
       )()
       .subscribe();
 
@@ -63,6 +60,7 @@ describe('loadConfigProvider', () => {
     expect(collectionService.init).toHaveBeenCalledWith('CollectionConfig');
     expect(inventoryService.init).toHaveBeenCalled();
     expect(notificationService.init).toHaveBeenCalled();
+    expect(searchService.init).toHaveBeenCalled();
     expect(notificationService.notify).toHaveBeenCalledWith({
       message: 'app initialized!',
     });

@@ -5,7 +5,7 @@ import { ITimerTime, TimerTime } from './timer-time.model';
   name: 'searchTimer',
 })
 export class SearchTimerPipe implements PipeTransform {
-  transform(timer: ITimerTime): string {
+  transform(timer?: ITimerTime): string {
     return timer
       ? `${this.addLeadZero(timer.minutes)}:${this.addLeadZero(timer.seconds)}`
       : '';
