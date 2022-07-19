@@ -1,4 +1,5 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CollectionPageModule } from '@collection-page/collection-page.module';
 import { NgMaterialModule } from '@shared/ng-material.module';
@@ -15,6 +16,7 @@ describe('SearchPageComponent', () => {
       imports: [NgMaterialModule, CollectionPageModule],
       declarations: [SearchPageComponent],
       providers: [NotificationService, HttpClient, HttpHandler],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CollectionService } from '@collection-page/collection.service';
 import { ICollectionElement } from '@collection-page/models';
+import { InventoryService } from '@inventory-page/inventory.service';
 import { NotificationService } from 'src/app/initialize/notification.service';
 import { ITimerState, SearchService } from './search.service';
 
@@ -12,11 +13,13 @@ import { ITimerState, SearchService } from './search.service';
 export class SearchPageComponent implements OnInit {
   public searchingInProgress = false;
   public timerState?: ITimerState;
+  public newElement?: ICollectionElement;
 
   constructor(
     private searchService: SearchService,
     private notificationService: NotificationService,
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private inventoryService: InventoryService
   ) {}
 
   ngOnInit(): void {
@@ -32,7 +35,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   public onSearchClick(): void {
-    this.timerState = { startTime: new Date(), durationAsSeconds: 25 * 60 };
+    this.timerState = { startTime: new Date(), durationAsSeconds: 5 };
   }
 
   public onCancelClick(): void {
@@ -44,11 +47,27 @@ export class SearchPageComponent implements OnInit {
   public onTimerDone(): void {
     this.searchingInProgress = false;
     this.searchService.saveTime(undefined);
-    const newElement: ICollectionElement =
-      this.collectionService.discoverRandomElement();
+    this.newElement = this.collectionService.discoverRandomElement();
+    if (this.newElement.howManyFound === 1) {
+      this.notificationService.notify({
+        message: `yay, new element! It is ${this.newElement.name}!`,
+        targetPath: 'collection',
+      });
+    }
+  }
+
+  public onAddToInventoryClick(): void {
+    if (!this.newElement) {
+      return;
+    }
+    this.inventoryService.addToInventory(this.newElement.id);
     this.notificationService.notify({
-      message: `yay! It is ${newElement.name}!`,
-      targetPath: 'collection',
+      message: `${this.newElement.name} was added to inventory`,
+      targetPath: 'inventory',
     });
+    this.newElement = undefined;
+  }
+  public onDropClick(): void {
+    this.newElement = undefined;
   }
 }

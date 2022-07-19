@@ -2,12 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
-import {
-  ICollectionElement,
-  CollectionElement,
-  CssStyle,
-  Collection,
-} from './models';
+import { CssStyle } from '@shared/general-types';
+import { ICollectionElement, CollectionElement, Collection } from './models';
 import { generateFromSource } from './collection-source-parser';
 import { ICollectionGeneratorConfig } from './collection.config';
 

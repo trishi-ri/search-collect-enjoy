@@ -8,6 +8,13 @@ export const ROUTES: Routes = [
       import('@search-page/search-page.module').then((m) => m.SearchPageModule),
   },
   {
+    path: 'inventory',
+    loadChildren: () =>
+      import('@inventory-page/inventory-page.module').then(
+        (m) => m.InventoryPageModule
+      ),
+  },
+  {
     path: 'collection',
     loadChildren: () =>
       import('@collection-page/collection-page.module').then(

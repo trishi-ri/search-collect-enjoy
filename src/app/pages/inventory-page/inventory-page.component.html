@@ -1,0 +1,19 @@
+<mat-selection-list #inventoryList>
+  <mat-list-option
+    *ngFor="let item of inventoryItems | async"
+    [matBadge]="item.count"
+    [value]="item"
+  >
+    <div mat-line>{{ item.name }}</div>
+    <div mat-line>{{ item.lastFoundTime | date }}</div>
+  </mat-list-option>
+</mat-selection-list>
+
+<button
+  mat-button
+  color="warn"
+  *ngIf="inventoryList.selectedOptions.selected.length > 0"
+  (click)="onDeleteSelectedClick(inventoryList.selectedOptions.selected)"
+>
+  delete selected
+</button>

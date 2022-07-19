@@ -1,5 +1,4 @@
-export type DateTimeISO = string;
-export type CssStyle = Record<string, string>;
+import { CssStyle, DateTimeISO } from '@shared/general-types';
 
 export interface ICollectionElement {
   id: number;

@@ -29,6 +29,8 @@ export class SearchService extends Storageble<ISearchState> {
     return this.load()?.timerState;
   }
 
+  // TODO: save new element?
+
   protected convertItemToStorageItem(item: ISearchState): string {
     return JSON.stringify(item);
   }

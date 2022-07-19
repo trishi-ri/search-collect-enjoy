@@ -12,3 +12,13 @@
     margin: 5px 0;
   }
 }
+
+.new-element-info {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+
+  .new-element-action {
+    margin: 5px;
+  }
+}
